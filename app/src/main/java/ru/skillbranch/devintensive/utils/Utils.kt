@@ -71,7 +71,8 @@ object Utils {
                             it.toString()
                         else if (it.isUpperCase())
                             symbol.capitalize()
-                        else symbol
+                        else
+                            symbol
                     )
                 }
         }
@@ -81,14 +82,18 @@ object Utils {
     fun toInitials(firstName: String?, lastName: String?): String? {
         var initials: String? = "";
 
-        if (firstName?.trim().isNullOrEmpty()) {
-            return null // lastName can't be set when ever firstName is not declared
+        if (!firstName?.trim().isNullOrEmpty()) {
+            initials = firstName?.trim()?.toUpperCase()?.substring(0, 1)
         }
-        initials = firstName?.trim()?.toUpperCase()?.substring(0, 1)
+
         if (!lastName?.trim().isNullOrEmpty()) {
             initials += lastName?.trim()?.toUpperCase()?.substring(0, 1)
         }
-        return initials
+
+        if (initials.isNullOrEmpty())
+            return null
+        else
+            return initials
     }
 
 

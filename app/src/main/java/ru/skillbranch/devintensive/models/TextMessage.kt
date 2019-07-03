@@ -2,7 +2,7 @@ package ru.skillbranch.devintensive.models
 
 import java.util.*
 
-class TextMessages (
+class TextMessage (
     id: String,
     from: User?,
     chat: Chat,
