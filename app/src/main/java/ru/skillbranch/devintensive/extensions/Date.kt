@@ -15,7 +15,7 @@ fun Date.format(pattern:String = "HH:mm:ss dd.MM.yy") : String {
 }
 
 fun Date.humanizeDiff(date: Date = Date()): String {
-    TODO("maybe later")
+    return "только что"
 }
 
 

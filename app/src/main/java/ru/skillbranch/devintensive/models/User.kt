@@ -13,6 +13,14 @@ data class User (
     var lastVisit : Date? = Date(),
     var isOnline : Boolean = false
 ) {
+    constructor(id: String) : this(
+        id = id,
+        firstName = "John",
+        lastName = "Doe $id"
+    )
+    init {
+        println("it's alive")
+    }
     constructor(id: String, firstName: String?, lastName: String?) : this(
         id = id,
         firstName = firstName,
