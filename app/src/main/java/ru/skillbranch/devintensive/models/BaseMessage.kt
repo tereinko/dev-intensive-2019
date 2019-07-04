@@ -17,8 +17,8 @@ abstract class BaseMessage (
                         isIncoming: Boolean = false): BaseMessage {
             lastId++
             return when (type) {
-                "text" -> TextMessage("$lastId",from, chat, date = date, text = payload as String)
-                else -> ImageMessage("$lastId",from, chat, date = date, image = payload as String)
+                "text" -> TextMessage("$lastId",from, chat, date = date, text = payload as String, isIncoming = isIncoming)
+                else -> ImageMessage("$lastId",from, chat, date = date, image = payload as String, isIncoming = isIncoming)
             }
         }
     }
