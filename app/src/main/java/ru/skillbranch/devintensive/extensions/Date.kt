@@ -14,9 +14,6 @@ fun Date.format(pattern: String = "HH:mm:ss dd.MM.yy"): String {
     return dateFormat.format(this)
 }
 
-fun TimeUnits.plural(value: Int): String {
-    return  ""
-}
 
 fun Date.humanizeDiff(date: Date = Date()): String {
 
@@ -46,7 +43,7 @@ fun Date.humanizeDiff(date: Date = Date()): String {
         else if (ending10 == 1L)
             return form1
         else
-            return  form5
+            return form5
     }
 
     if (diffSeconds <= 1)
@@ -57,17 +54,20 @@ fun Date.humanizeDiff(date: Date = Date()): String {
         return processTenses("минуту")
     else if (diffMinutes <= 45)
         return processTenses(
-            "$diffMinutes ${getEnding(diffMinutes, "минуту", "минуты", "минут")}")
+            "$diffMinutes ${getEnding(diffMinutes, "минуту", "минуты", "минут")}"
+        )
     else if (diffMinutes <= 75)
         return processTenses("час")
     else if (diffHours <= 22)
         return processTenses(
-            "$diffHours ${getEnding(diffHours, "час", "часа", "часов")}")
+            "$diffHours ${getEnding(diffHours, "час", "часа", "часов")}"
+        )
     else if (diffHours <= 26)
         return processTenses("день")
     else if (diffDays <= 360)
         return processTenses(
-            "$diffDays ${getEnding(diffDays, "день", "дня", "дней")}")
+            "$diffDays ${getEnding(diffDays, "день", "дня", "дней")}"
+        )
     else if (isFutureDetected)
         return "более чем через год"
     else
@@ -76,7 +76,43 @@ fun Date.humanizeDiff(date: Date = Date()): String {
 }
 
 
-enum class TimeUnits { SECOND, MINUTE, HOUR, DAY }
+enum class TimeUnits {
+    SECOND, MINUTE, HOUR, DAY;
+
+    fun getEnding(value: Int, form1: String, form2: String, form5: String): String {
+        val ending10 = value % 10
+        val ending100 = value % 100
+
+        if (ending100 > 10 && ending100 < 20)
+            return form5
+        else if (ending10 > 1 && ending10 < 5)
+            return form2
+        else if (ending10 == 1)
+            return form1
+        else
+            return form5
+    }
+
+    fun plural(value: Int): String {
+        val absValue: Int = abs(value)
+        return when (this) {
+            SECOND -> "$absValue ${getEnding(
+                abs(value),
+                "секунду",
+                "секунды",
+                "секунд"
+            )}"
+            MINUTE -> "$absValue ${getEnding(
+                abs(value),
+                "минуту",
+                "минуты",
+                "минут"
+            )}"
+            HOUR -> "$absValue ${getEnding(abs(value), "час", "часа", "часов")}"
+            DAY -> "$absValue ${getEnding(abs(value), "день", "дня", "дней")}"
+        }
+    }
+}
 
 fun Date.add(value: Int, units: TimeUnits = TimeUnits.SECOND): Date {
     var time = this.time
