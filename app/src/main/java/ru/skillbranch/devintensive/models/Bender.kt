@@ -1,5 +1,7 @@
 package ru.skillbranch.devintensive.models
 
+import android.util.Log
+
 class Bender(var status: Status = Status.NORMAL, var question: Question = Question.NAME) {
 
     fun askQuestion(): String = when (question) {
@@ -12,7 +14,13 @@ class Bender(var status: Status = Status.NORMAL, var question: Question = Questi
     }
 
     fun listenAnswer(answer: String): Pair<String, Triple<Int, Int, Int>> {
-        return if (question.answers.contains(answer)) {
+        Log.d("M_Bender", "$answer")
+        var validationResponse: String = validateAnswer(answer)
+        if (validationResponse.isNotEmpty()) {
+            return (validationResponse + "\n" + question.question) to status.color
+        }
+
+        return if (question.answers.contains(answer.toLowerCase())) {
             question = question.nextQuestion()
             "Отлично - ты справился\n${question.question}" to status.color
         } else {
@@ -25,6 +33,30 @@ class Bender(var status: Status = Status.NORMAL, var question: Question = Questi
                 "Это неправильный ответ\n${question.question}" to status.color
             }
         }
+    }
+
+    fun validateAnswer(answer: String): String {
+        when (question) {
+            Question.NAME -> if (answer.trimIndent().isNotEmpty() && !answer.trimIndent()[0].isUpperCase()) {
+                return "Имя должно начинаться с заглавной буквы"
+            }
+            Question.PROFESSION -> if (answer.trimIndent().isNotEmpty() && !answer.trimIndent()[0].isLowerCase()) {
+                return "Профессия должна начинаться со строчной буквы"
+            }
+            Question.MATERIAL -> if (answer.trimIndent().isNotEmpty() && answer.trimIndent().contains(Regex("\\d"))) {
+                return "Материал не должен содержать цифр"
+            }
+            Question.BDAY -> if (answer.trimIndent().isNotEmpty() && !answer.trimIndent().contains(Regex("^[0-9]*\$"))) {
+                return "Год моего рождения должен содержать только цифры"
+            }
+            Question.SERIAL -> if (answer.trimIndent().isNotEmpty() && (!answer.trimIndent().contains(Regex("^[0-9]*\$")) || answer.trimIndent().length != 7))  {
+                return "Серийный номер содержит только цифры, и их 7"
+            }
+            Question.IDLE -> {
+                return ""
+            }
+        }
+        return ""
     }
 
     enum class Status(val color: Triple<Int, Int, Int>) {
