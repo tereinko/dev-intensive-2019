@@ -46,7 +46,7 @@ class Bender(var status: Status = Status.NORMAL, var question: Question = Questi
         NAME("Как меня зовут?", listOf("бендер", "bender")) {
             override fun nextQuestion(): Question = PROFESSION
         },
-        PROFESSION("Назови мою профессию?", listOf("бендер", "сгибальщик")) {
+        PROFESSION("Назови мою профессию?", listOf("сгибальщик", "bender")) {
             override fun nextQuestion(): Question = MATERIAL
         },
         MATERIAL("Из чего я сделан?", listOf("металл", "дерево", "metal", "iron", "wood")) {
