@@ -17,7 +17,7 @@ fun Activity.hideKeyboard() {
 fun Activity.isKeyboardOpen(): Boolean {
     val rootView: View = findViewById<View>(android.R.id.content)
     rootView.getWindowVisibleDisplayFrame(Rect())
-    return (rootView.height > Rect().height())
+    return (rootView.height < Rect().height())
 }
 fun Activity.isKeyboardClosed(): Boolean {
     return !isKeyboardOpen()
