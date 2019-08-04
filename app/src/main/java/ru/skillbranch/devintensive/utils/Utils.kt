@@ -1,5 +1,14 @@
 package ru.skillbranch.devintensive.utils
 
+import android.content.Context
+import android.graphics.Bitmap
+import android.graphics.Canvas
+import android.graphics.Color
+import android.graphics.Paint
+import android.graphics.drawable.Drawable
+import androidx.core.graphics.drawable.toDrawable
+import ru.skillbranch.devintensive.R
+
 object Utils {
     fun parseFullName(fullName: String?): Pair<String?, String?> {
         val parts: List<String>? = fullName?.trim()?.split(" ")
@@ -21,9 +30,8 @@ object Utils {
         if (payload.trim().isEmpty())
             return payload
 
-        var engOutput: String? = ""
+        var engOutput: String?
 
-        //val map= hashMapOf<String, String>()
         val map = mapOf(
             "а" to "a",
             "б" to "b",
@@ -60,7 +68,6 @@ object Utils {
             "я" to "ya"
         )
 
-
         engOutput = buildString {
             payload.replace(" ", divider)
                 .toCharArray()
@@ -96,5 +103,23 @@ object Utils {
             return initials
     }
 
-
+    fun createDefaultAvatar(str: String, context: Context): Drawable {
+        val bitmap = Bitmap.createBitmap(500, 500, Bitmap.Config.ARGB_8888)
+        val canvas = Canvas(bitmap)
+        canvas.drawRect(
+            0f,
+            0f,
+            500f,
+            500f,
+            Paint().apply {
+                color = context.theme.obtainStyledAttributes(listOf(R.attr.colorAccent).toIntArray()).getColor(0, 0)
+            })
+        canvas.drawText(str, 250f, 320f, Paint().apply {
+            color = Color.WHITE
+            textSize = 200f
+            textAlign = Paint.Align.CENTER
+        })
+        canvas.save()
+        return bitmap.toDrawable(context.resources)
+    }
 }
