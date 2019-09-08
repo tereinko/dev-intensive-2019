@@ -17,7 +17,7 @@ import android.widget.ImageView
 import androidx.annotation.*
 
 
-class CircleImageView @JvmOverloads constructor(
+open class CircleImageView @JvmOverloads constructor(
     context: Context,
     attrs: AttributeSet? = null,
     defStyle: Int = 0

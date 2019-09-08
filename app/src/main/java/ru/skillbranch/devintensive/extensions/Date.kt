@@ -72,7 +72,6 @@ fun Date.humanizeDiff(date: Date = Date()): String {
         return "более чем через год"
     else
         return "более года назад"
-
 }
 
 
@@ -128,5 +127,17 @@ fun Date.add(value: Int, units: TimeUnits = TimeUnits.SECOND): Date {
     this.time = time
 
     return this
+}
 
+/* hometask_5 */
+fun Date.shortFormat(): String {
+    val pattern = if (this.isSameDay(Date())) "HH:mm" else "dd.MM.yy"
+    val dateFormat = SimpleDateFormat(pattern, Locale("ru"))
+    return dateFormat.format(this)
+}
+
+fun Date.isSameDay(date: Date): Boolean {
+    val day1 = this.time / DAY
+    val day2 = date.time / DAY
+    return day1 == day2
 }

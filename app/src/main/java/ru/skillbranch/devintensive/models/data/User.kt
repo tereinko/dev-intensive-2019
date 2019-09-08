@@ -1,5 +1,6 @@
-package ru.skillbranch.devintensive.models
+package ru.skillbranch.devintensive.models.data
 
+import ru.skillbranch.devintensive.extensions.humanizeDiff
 import ru.skillbranch.devintensive.utils.Utils
 import java.util.*
 
@@ -13,6 +14,25 @@ data class User(
     var lastVisit: Date? = Date(),
     var isOnline: Boolean = false
 ) {
+    // hometask_5
+    fun toUserItem(): UserItem {
+        val lastActivity = when{
+            lastVisit == null -> "Еще ни разу не заходил"
+            isOnline -> "online"
+            else -> "Последний раз был ${lastVisit!!.humanizeDiff()}"
+        }
+        return UserItem(
+            id,
+            "${firstName.orEmpty()} ${lastName.orEmpty()}",
+            Utils.toInitials(firstName, lastName),
+            avatar,
+            lastActivity,
+            false,
+            isOnline
+        )
+    }
+
+    // older ones
     constructor(id: String) : this(
         id = id,
         firstName = "John",
@@ -37,7 +57,11 @@ data class User(
         fun makeUser(fullName: String?): User {
             lastId++
             val (firstName, lastName) = Utils.parseFullName(fullName)
-            return User(id = "$lastId", firstName = firstName, lastName = lastName)
+            return User(
+                id = "$lastId",
+                firstName = firstName,
+                lastName = lastName
+            )
         }
     }
 
@@ -60,6 +84,17 @@ data class User(
         fun respect(respect: Int = 0) = apply { this.respect = respect }
         fun lastVisit(lastVisit: Date? = Date()) = apply { this.lastVisit = lastVisit }
         fun isOnline(isOnline: Boolean = false) = apply { this.isOnline = isOnline }
-        fun build() = User(id ?: "", firstName, lastName, avatar, rating, respect, lastVisit, isOnline)
+        fun build() = User(
+            id ?: "",
+            firstName,
+            lastName,
+            avatar,
+            rating,
+            respect,
+            lastVisit,
+            isOnline
+        )
     }
+
+
 }
