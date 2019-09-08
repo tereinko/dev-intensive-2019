@@ -27,6 +27,7 @@
         <item name="colorText">@color/color_gray_dark</item>
         <item name="colorTitle">@color/color_primary</item>
         <item name="colorSnackbarText">@android:color/white</item>
+        <item name="colorIndicator">@color/color_green</item>
         <!--Night UI ends here-->
     </style>
 

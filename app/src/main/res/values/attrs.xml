@@ -26,4 +26,5 @@
     <attr name="colorText" format="reference"/>
     <attr name="colorTitle" format="reference"/>
     <attr name="colorSnackbarText" format="reference"/>
+    <attr name="colorIndicator" format="reference"/>
 </resources>

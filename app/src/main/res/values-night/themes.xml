@@ -23,5 +23,6 @@
         <item name="colorText">@color/color_gray</item>
         <item name="colorTitle">@android:color/white</item>
         <item name="colorSnackbarText">@color/color_cod_gray</item>
+        <item name="colorIndicator">@color/color_accent_night</item>
     </style>
 </resources>
