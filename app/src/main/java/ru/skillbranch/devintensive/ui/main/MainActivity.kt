@@ -13,11 +13,14 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.android.material.snackbar.Snackbar
 import kotlinx.android.synthetic.main.activity_main.*
 import ru.skillbranch.devintensive.R
+import ru.skillbranch.devintensive.extensions.setBackgroundColor
+import ru.skillbranch.devintensive.extensions.setTextColor
 import ru.skillbranch.devintensive.models.data.ChatType
 import ru.skillbranch.devintensive.ui.adapters.ChatAdapter
 import ru.skillbranch.devintensive.ui.adapters.ChatItemTouchHelperCallback
 import ru.skillbranch.devintensive.ui.archive.ArchiveActivity
 import ru.skillbranch.devintensive.ui.group.GroupActivity
+import ru.skillbranch.devintensive.utils.Utils
 import ru.skillbranch.devintensive.viewmodels.MainViewModel
 
 class MainActivity : AppCompatActivity() {
@@ -62,7 +65,10 @@ class MainActivity : AppCompatActivity() {
                 val intent = Intent(this, ArchiveActivity::class.java)
                 startActivity(intent)
             } else {
-                Snackbar.make(rv_chat_list, "Click on ${it.title}", Snackbar.LENGTH_SHORT).show()
+                Snackbar.make(rv_chat_list, "Click on ${it.title}", Snackbar.LENGTH_SHORT)
+                    .setTextColor(Utils.getColorForNightUI(this, R.attr.colorSnackbarText))
+                    .setBackgroundColor(Utils.getColorForNightUI(this, R.attr.colorSnackbar))
+                    .show()
             }
         }
         val divider = DividerItemDecoration(this, DividerItemDecoration.VERTICAL)
@@ -70,6 +76,8 @@ class MainActivity : AppCompatActivity() {
             val id = it.id
             viewModel.addToArchive(it.id)
             Snackbar.make(rv_chat_list, "Вы точно хотите добавить ${it.title} в архив?", Snackbar.LENGTH_LONG)
+                .setTextColor(Utils.getColorForNightUI(this, R.attr.colorSnackbarText))
+                .setBackgroundColor(Utils.getColorForNightUI(this, R.attr.colorSnackbar))
                 .setAction("ОТМЕНА") { viewModel.restoreFromArchive(id) }
                 .show()
         }

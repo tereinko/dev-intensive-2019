@@ -6,6 +6,7 @@ import android.graphics.Canvas
 import android.graphics.Color
 import android.graphics.Paint
 import android.graphics.drawable.Drawable
+import android.util.TypedValue
 import androidx.core.graphics.drawable.toDrawable
 import ru.skillbranch.devintensive.R
 
@@ -121,5 +122,12 @@ object Utils {
         })
         canvas.save()
         return bitmap.toDrawable(context.resources)
+    }
+
+    //    Night UI
+    fun getColorForNightUI(context: Context, attrColor: Int): Int {
+        val value = TypedValue()
+        context.theme.resolveAttribute(attrColor, value, true)
+        return value.data
     }
 }

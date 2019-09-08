@@ -15,7 +15,19 @@
         <item name="android:windowActivityTransitions">true</item>
         <item name="android:windowAnimationStyle">@style/ActivityTransitions</item>
 
-
+        <!--Night UI starts here-->
+        <item name="colorToolbar">@color/color_primary</item>
+        <item name="colorBackground">@android:color/white</item>
+        <item name="colorItemView">@android:color/white</item>
+        <item name="colorCounter">@color/color_indicator</item>
+        <item name="colorSelected">@color/color_gray_light</item>
+        <item name="colorSnackbar">@color/color_primary</item>
+        <item name="colorChipCloseIconTint">@android:color/white</item>
+        <item name="colorChipBackground">@color/color_primary_light</item>
+        <item name="colorText">@color/color_gray_dark</item>
+        <item name="colorTitle">@color/color_primary</item>
+        <item name="colorSnackbarText">@android:color/white</item>
+        <!--Night UI ends here-->
     </style>
 
     <style name="SplashTheme" parent="Theme.MaterialComponents.Light.NoActionBar">

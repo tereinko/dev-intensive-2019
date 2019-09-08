@@ -2,6 +2,7 @@ package ru.skillbranch.devintensive
 
 import android.app.Application
 import androidx.appcompat.app.AppCompatDelegate
+import androidx.appcompat.app.AppCompatDelegate.MODE_NIGHT_YES
 import ru.skillbranch.devintensive.repositories.PreferencesRepository
 
 class App : Application() {
@@ -18,6 +19,7 @@ class App : Application() {
         super.onCreate()
         PreferencesRepository.getAppTheme().also {
             AppCompatDelegate.setDefaultNightMode(it)
+//            AppCompatDelegate.setDefaultNightMode(MODE_NIGHT_YES)
         }
     }
 }

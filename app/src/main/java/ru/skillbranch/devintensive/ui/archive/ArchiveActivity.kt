@@ -10,8 +10,11 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.android.material.snackbar.Snackbar
 import kotlinx.android.synthetic.main.activity_archive.*
 import ru.skillbranch.devintensive.R
+import ru.skillbranch.devintensive.extensions.setBackgroundColor
+import ru.skillbranch.devintensive.extensions.setTextColor
 import ru.skillbranch.devintensive.ui.adapters.ChatAdapter
 import ru.skillbranch.devintensive.ui.adapters.ChatItemTouchHelperCallback
+import ru.skillbranch.devintensive.utils.Utils
 import ru.skillbranch.devintensive.viewmodels.ArchiveViewModel
 
 class ArchiveActivity : AppCompatActivity() {
@@ -31,15 +34,20 @@ class ArchiveActivity : AppCompatActivity() {
     }
 
     private fun initViews() {
-//        title = "Архив чатов"
+        title = "Архив чатов"
         chatAdapter = ChatAdapter {
-            Snackbar.make(rv_archive_list, "Click on ${it.title}", Snackbar.LENGTH_SHORT).show()
+            Snackbar.make(rv_archive_list, "Click on ${it.title}", Snackbar.LENGTH_SHORT)
+                .setTextColor(Utils.getColorForNightUI(this, R.attr.colorSnackbarText))
+                .setBackgroundColor(Utils.getColorForNightUI(this, R.attr.colorSnackbar))
+                .show()
         }
         val divider = DividerItemDecoration(this, DividerItemDecoration.VERTICAL)
         val touchCallback = ChatItemTouchHelperCallback(chatAdapter) {
             val id = it.id
             viewModel.restoreFromArchive(it.id)
             Snackbar.make(rv_archive_list, "Восстановить чат ${it.title} из архива?", Snackbar.LENGTH_LONG)
+                .setTextColor(Utils.getColorForNightUI(this, R.attr.colorSnackbarText))
+                .setBackgroundColor(Utils.getColorForNightUI(this, R.attr.colorSnackbar))
                 .setAction("ОТМЕНА") { viewModel.addToArchive(id) }
                 .show()
         }

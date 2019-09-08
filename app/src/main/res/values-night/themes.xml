@@ -11,5 +11,17 @@
         <item name="colorIcon">@android:color/white</item>
         <item name="colorDivider">@color/color_divider_dark</item>
         <item name="android:statusBarColor">@android:color/black</item>
+        <!--Night UI-->
+        <item name="colorToolbar">@color/color_mine_shaft</item>
+        <item name="colorBackground">@color/color_cod_gray</item>
+        <item name="colorItemView">@color/color_nero</item>
+        <item name="colorCounter">@color/color_gray_dark</item>
+        <item name="colorSelected">@color/color_mine_shaft</item>
+        <item name="colorSnackbar">@android:color/white</item>
+        <item name="colorChipCloseIconTint">@color/color_gray</item>
+        <item name="colorChipBackground">@color/color_nero</item>
+        <item name="colorText">@color/color_gray</item>
+        <item name="colorTitle">@android:color/white</item>
+        <item name="colorSnackbarText">@color/color_cod_gray</item>
     </style>
 </resources>
